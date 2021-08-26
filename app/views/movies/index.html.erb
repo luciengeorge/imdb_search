@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-sm-8">
+      <%= form_tag movies_path, method: :get, class: 'my-5 d-flex' do %>
+        <%= text_field_tag :query,
+          params[:query],
+          class: "form-control",
+          placeholder: "Find a movie"
+        %>
+        <%= submit_tag "Search", class: "btn btn-primary" %>
+      <% end %>
+      <div id="movies">
+        <% @results.each do |result| %>
+          <% if result.searchable_type == 'Movie' %>
+            <h4><%= result.searchable.title %> <%= result.searchable.year %> <%= result.searchable_type %></h4>
+            <p><%= result.searchable.synopsis %></p>
+          <% else %>
+            <h4><%= result.searchable.title %> <%= result.searchable_type %></h4>
+            <p><%= result.searchable.synopsis %></p>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
